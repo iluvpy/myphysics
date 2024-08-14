@@ -1,0 +1,11 @@
+cflags = -std=c++17 -O2 -g
+ldflags = -lsfml-graphics -lsfml-window -lsfml-system
+
+rule cc
+    command = clang++ -c $in -o $out $cflags
+rule lnk
+    command = clang++ $in -o $out $ldflags
+
+
+build obj/main.o: cc src/main.cpp
+build client: lnk obj/main.o 
