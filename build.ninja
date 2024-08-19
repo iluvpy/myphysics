@@ -1,4 +1,4 @@
-cflags = -std=c++17 -O2 -g
+cflags = -std=c++17 -O2 -g -I./src/headers/
 ldflags = -lsfml-graphics -lsfml-window -lsfml-system
 
 rule cc
@@ -7,5 +7,8 @@ rule lnk
     command = clang++ $in -o $out $ldflags
 
 
+build obj/shapes.o: cc src/Shapes.cpp
+build obj/time.o: cc src/Time.cpp
+build obj/util.o: cc src/Util.cpp
 build obj/main.o: cc src/main.cpp
-build client: lnk obj/main.o 
+build client: lnk obj/main.o obj/shapes.o obj/time.o obj/util.o
