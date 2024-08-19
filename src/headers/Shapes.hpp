@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Util.hpp"
 
 #define DEFAULT_COLOR sf::Color::Black
 
@@ -10,19 +11,18 @@ class PhysicalObject {
 private: 
     sf::Vector2f velocity;
     sf::Vector2f acceleration;
-    
+    float m_friction = 1.0f;
 protected:
 
-    inline void updateVelocity(float deltaT) {velocity += acceleration * deltaT;} 
-    inline void updatePos(sf::Vector2f& pos, float deltaT) {
-        pos.x += velocity.x * deltaT;
-        pos.y += velocity.y * deltaT;
-    }
+    void updateVelocity(float deltaT);
+    void updatePos(sf::Vector2f& pos, float deltaT);
 
 public:
 
     inline void addForceX(float force) {acceleration.x += force;}
     inline void addForceY(float force) {acceleration.y += force;}
+    inline void setVelocityX(float vx) { velocity.x = vx; }
+    inline void setVelocityY(float vy) { velocity.y = vy; }
     void update(sf::Vector2f& pos, float deltaT);
 };
 
@@ -52,9 +52,7 @@ public:
     }
     
     inline const sf::Drawable& getDrawable() {return m_rectangle;}
-    void update(float dT) {
-
-    }
+    void update(float deltaT);
 };
 
 // TODO: Triangles, for now i'll only work with rects and circles

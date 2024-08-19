@@ -3,12 +3,14 @@
 #include "Time.hpp"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(500, 500), "Hello SFML");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Hello SFML");
     sf::Color backgroundColor = sf::Color::White;
     
     Rectangle rect(100, 100, 100, 100, sf::Color::Red);
+    rect.addForceX(1000);
+
     Circle circle(200, 200, 100);
-    TimeHandler tHandler(1000);
+    TimeHandler tHandler(600);
     int frame = 0;
     while (window.isOpen()) {
         tHandler.startFrame();
@@ -23,14 +25,14 @@ int main() {
         window.draw(rect.getDrawable());
         window.draw(circle.getDrawable());
 
-
         rect.update(tHandler.getDeltaT());
-        
+
         window.display();
         tHandler.waitForNextFrame();
         tHandler.endFrame();
         if (frame % 100 == 0) {
             std::cout << "avg frames: " << tHandler.getAverageFrameRate() << std::endl;
+            std::cout << "avg delta T / 1e6: " << tHandler.getAverageDT() / 1e6 << std::endl;
         }
         frame++;
     }

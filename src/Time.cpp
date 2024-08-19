@@ -25,6 +25,10 @@ void TimeHandler::waitForNextFrame() {
     Util::sleepMicro(timeForEachFrame - tdiff);
 }
 
+float TimeHandler::getAverageDT() {
+    return std::accumulate(m_lastdts.begin(), m_lastdts.end(), 0) / m_lastdts.size();
+}
+
 float TimeHandler::getAverageFrameRate() {
-    return 1e6 / (std::accumulate(m_lastdts.begin(), m_lastdts.end(), 0) / m_lastdts.size());
+    return 1e6 / getAverageDT();
 }
