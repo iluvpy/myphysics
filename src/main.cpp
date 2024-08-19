@@ -9,7 +9,7 @@ int main() {
     Rectangle rect(100, 100, 100, 100, sf::Color::Red);
     Circle circle(200, 200, 100);
     TimeHandler tHandler(1000);
-
+    int frame = 0;
     while (window.isOpen()) {
         tHandler.startFrame();
         sf::Event event;
@@ -27,9 +27,12 @@ int main() {
         rect.update(tHandler.getDeltaT());
         
         window.display();
-        tHandler.endFrame();
         tHandler.waitForNextFrame();
-        std::cout << tHandler.getFrameRate() << std::endl;
+        tHandler.endFrame();
+        if (frame % 100 == 0) {
+            std::cout << "avg frames: " << tHandler.getAverageFrameRate() << std::endl;
+        }
+        frame++;
     }
 
     return 0;

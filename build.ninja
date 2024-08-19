@@ -1,8 +1,8 @@
-cflags = -std=c++17 -O2 -g -I./src/headers/
+cflags = -std=c++17 -g -I./src/headers/
 ldflags = -lsfml-graphics -lsfml-window -lsfml-system
 
 rule cc
-    command = clang++ -c $in -o $out $cflags
+    command = clang++ -c $in -o $out $cflags 
 rule lnk
     command = clang++ $in -o $out $ldflags
 

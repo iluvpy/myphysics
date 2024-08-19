@@ -1,6 +1,11 @@
 #pragma once
 
 #include <chrono>
+#include <vector>
+#include <numeric>
+#include <iostream>
+
+#include "Util.hpp"
 
 using HRClock = std::chrono::high_resolution_clock;
 using Moment = std::chrono::_V2::system_clock::time_point;
@@ -10,7 +15,8 @@ private:
     int m_maxFrames;
     Moment m_startFrameT;
     float m_dT;
-
+    std::vector<float> m_lastdts;
+    int m_lastdtsIndex = 0;
     static float getTDiff(Moment end, Moment start);
 
 public:
@@ -24,5 +30,6 @@ public:
     void waitForNextFrame();
     inline float getFrameRate() {return 1000.0f / m_dT;}
     inline float getDeltaT() { return m_dT; }
+    float getAverageFrameRate();
 
 };
