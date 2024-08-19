@@ -8,7 +8,8 @@ rule lnk
 
 
 build obj/shapes.o: cc src/Shapes.cpp
+build obj/keyboard.o: cc src/Keyboard.cpp
 build obj/time.o: cc src/Time.cpp
 build obj/util.o: cc src/Util.cpp
 build obj/main.o: cc src/main.cpp
-build client: lnk obj/main.o obj/shapes.o obj/time.o obj/util.o
+build client: lnk obj/main.o obj/shapes.o obj/time.o obj/util.o obj/keyboard.o
